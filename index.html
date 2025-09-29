@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="it" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATC Housing - Portale Inquilini</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1173d4",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922"
+          },
+          fontFamily: {
+            display: ["Public Sans", "sans-serif"]
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- Meta tags for PWA -->
+  <meta name="description" content="ATC Housing - Portale digitale per inquilini. Gestisci manutenzione, pagamenti, comunicazioni e supporto.">
+  <meta name="theme-color" content="#1173d4">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%231173d4' d='M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z'/%3E%3C/svg%3E">
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+
+  <div class="flex h-screen bg-slate-50/50 dark:bg-slate-950">
+    <!-- Sidebar Navigation -->
+    <aside class="nav-sidebar flex flex-col mobile-hide">
+      <!-- Logo and Brand -->
+      <div class="nav-header">
+        <div class="w-8 h-8 text-primary">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"/>
+          </svg>
+        </div>
+        <h1 class="text-xl font-bold text-slate-900 dark:text-white">ATC Housing</h1>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="flex-1 px-6 py-6 flex flex-col">
+        <a href="#dashboard" class="nav-link-active" data-page="dashboard">
+          <span class="material-symbols-outlined text-2xl">dashboard</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="#maintenance" class="nav-link" data-page="maintenance">
+          <span class="material-symbols-outlined text-2xl">construction</span>
+          <span>Manutenzione</span>
+        </a>
+        <a href="#communications" class="nav-link" data-page="communications">
+          <span class="material-symbols-outlined text-2xl">campaign</span>
+          <span>Comunicazioni</span>
+        </a>
+        <a href="#payments" class="nav-link" data-page="payments">
+          <span class="material-symbols-outlined text-2xl">credit_card</span>
+          <span>Pagamenti</span>
+        </a>
+        <a href="#support" class="nav-link" data-page="support">
+          <span class="material-symbols-outlined text-2xl">support_agent</span>
+          <span>Supporto</span>
+        </a>
+      </nav>
+
+      <!-- User Actions -->
+      <div class="px-6 py-4 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-col">
+        <button id="theme-toggle" class="nav-link w-full" title="Cambia tema">
+          <span class="material-symbols-outlined text-2xl">contrast</span>
+          <span>Tema</span>
+        </button>
+        <a href="#profile" class="nav-link" data-page="profile">
+          <span class="material-symbols-outlined text-2xl">person</span>
+          <span>Profilo</span>
+        </a>
+        <a href="#logout" class="nav-link">
+          <span class="material-symbols-outlined text-2xl">logout</span>
+          <span>Esci</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto">
+      <!-- Top Header -->
+      <header class="flex items-center justify-between px-6 h-20 border-b border-slate-200/60 dark:border-slate-800/60 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg sticky top-0 z-40">
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-button" class="p-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden">
+          <span class="material-symbols-outlined text-xl">menu</span>
+        </button>
+
+        <!-- Breadcrumb or page title for mobile -->
+        <div class="md:hidden">
+          <h1 class="font-semibold text-slate-900 dark:text-white">Dashboard</h1>
+        </div>
+
+        <!-- User info and notifications -->
+        <div class="flex items-center gap-4">
+          <!-- Notifications -->
+          <button class="relative p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+            <span class="material-symbols-outlined text-xl">notifications</span>
+            <span class="absolute -top-0.5 -right-0.5 block h-3 w-3 rounded-full bg-primary ring-2 ring-white dark:ring-slate-900"></span>
+          </button>
+
+          <!-- User profile -->
+          <div class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer">
+            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-9 w-9 ring-2 ring-slate-200 dark:ring-slate-700"
+                 style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKIzyBvGDWqkRQ9Q4UqltLGYR0e2YR256p2wv8VP883A3COrc0bUyRGwFqAm3eOHZf_M2dA7TE5Q4LI4XSWyejV4PTrDQnthw0M-ZtyIPBwzye-OsV5OluhxokXSaTJyID3lAWTTDvpnoOjMe9PRp9-__7BJDrZeCerio3kIkiYQI-tZhbV0qIUuvM-umvZgIgjLrShHe56UIuilIxPijHqHx7hKWGO4aVhtG6_DhunykpDWtU-bc2FRVlOow8luR0OCLDce_0KeE");'></div>
+            <div class="text-sm mobile-hide">
+              <div class="font-semibold text-slate-900 dark:text-white">Elena Rossi</div>
+              <div class="text-slate-500 dark:text-slate-400 text-xs">Inquilino</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div id="main-content" class="p-6 lg:p-8">
+        <!-- Content will be dynamically loaded here -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-menu" class="mobile-menu hidden">
+    <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 text-primary">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"/>
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white">ATC Housing</h2>
+      </div>
+      <button id="close-mobile-menu" class="p-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <span class="material-symbols-outlined text-xl">close</span>
+      </button>
+    </div>
+
+    <nav>
+      <a href="#dashboard" class="nav-link" data-page="dashboard">
+        <span class="material-symbols-outlined text-xl">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="#maintenance" class="nav-link" data-page="maintenance">
+        <span class="material-symbols-outlined text-xl">construction</span>
+        <span>Manutenzione</span>
+      </a>
+      <a href="#communications" class="nav-link" data-page="communications">
+        <span class="material-symbols-outlined text-xl">campaign</span>
+        <span>Comunicazioni</span>
+      </a>
+      <a href="#payments" class="nav-link" data-page="payments">
+        <span class="material-symbols-outlined text-xl">credit_card</span>
+        <span>Pagamenti</span>
+      </a>
+      <a href="#support" class="nav-link" data-page="support">
+        <span class="material-symbols-outlined text-xl">support_agent</span>
+        <span>Supporto</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Loading indicator -->
+  <div id="loading" class="hidden fixed inset-0 bg-slate-900/20 backdrop-blur-sm flex items-center justify-center z-50">
+    <div class="surface-elevated p-8">
+      <div class="flex flex-col items-center gap-4">
+        <div class="spinner">
+          <div class="w-8 h-8 rounded-full border-3 border-slate-200 border-t-primary animate-spin"></div>
+        </div>
+        <span class="font-medium text-slate-700 dark:text-slate-300">Caricamento...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application JavaScript -->
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

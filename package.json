@@ -1,0 +1,23 @@
+{
+  "name": "atc-mvp",
+  "version": "1.0.0",
+  "description": "ATC Housing Management MVP - Digital platform for tenant services",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server . -p 3000 -o",
+    "build": "echo 'Static build - no build step required'",
+    "start": "npx http-server . -p 8080",
+    "docker:build": "docker build -t atc-mvp .",
+    "docker:dev": "./scripts/deploy.sh development",
+    "docker:prod": "./scripts/deploy.sh production",
+    "docker:stop": "./scripts/deploy.sh stop",
+    "docker:logs": "./scripts/deploy.sh logs",
+    "docker:cleanup": "./scripts/deploy.sh cleanup"
+  },
+  "keywords": ["atc", "housing", "mvp", "tenant-management"],
+  "author": "ATC Development Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

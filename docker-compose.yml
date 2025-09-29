@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  # ATC MVP Frontend Application
+  atc-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: atc-mvp-frontend
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.atc.service=frontend"
+      - "com.atc.version=1.0.0"
+      - "com.atc.description=ATC Housing MVP Frontend"
+
+  # Development version with hot reload
+  atc-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: atc-mvp-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+    profiles:
+      - dev
+
+  # Future: Database service (PostgreSQL)
+  # atc-database:
+  #   image: postgres:15-alpine
+  #   container_name: atc-mvp-db
+  #   environment:
+  #     - POSTGRES_DB=atc_mvp
+  #     - POSTGRES_USER=atc_user
+  #     - POSTGRES_PASSWORD=secure_password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: unless-stopped
+  #   profiles:
+  #     - full
+
+  # Future: Backend API service
+  # atc-backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: atc-mvp-api
+  #   environment:
+  #     - NODE_ENV=production
+  #     - DATABASE_URL=postgresql://atc_user:secure_password@atc-database:5432/atc_mvp
+  #   ports:
+  #     - "3001:3001"
+  #   depends_on:
+  #     - atc-database
+  #   restart: unless-stopped
+  #   profiles:
+  #     - full
+
+networks:
+  atc-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+
+# Usage:
+# Production: docker-compose up -d atc-frontend
+# Development: docker-compose --profile dev up -d atc-dev
+# Full stack: docker-compose --profile full up -d
